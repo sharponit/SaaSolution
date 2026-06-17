@@ -30,7 +30,7 @@ export const ContainerScroll = ({ titleComponent, children }: { titleComponent: 
           style={{ rotateX: rotate, scale, boxShadow: "rgba(0, 0, 0, 0.08) 0px 30px 90px 0px, rgba(0, 0, 0, 0.08) 0px 8px 20px 0px", transformStyle: "preserve-3d" }}
           className="mx-auto max-w-5xl mt-6 md:mt-12 h-[30rem] md:h-[40rem] w-full border-4 border-[#6C6C6C] p-2 md:p-6 bg-[#222222] rounded-[30px] shadow-2xl"
         >
-          <div className={cn("h-full w-full overflow-hidden rounded-2xl bg-white md:rounded-2xl")}>{children}</div>
+          <div className={cn("h-full w-full overflow-hidden rounded-2xl bg-[#F3F2EE] md:rounded-2xl")}>{children}</div>
         </motion.div>
       </div>
     </div>

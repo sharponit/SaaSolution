@@ -4,7 +4,7 @@ import { createContext, useContext, useMemo, useState } from "react";
 import { MotionConfig } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-type Product = { name: string; image: string };
+export type Product = { name: string; image: string };
 
 type HoverSliderContextValue = {
   activeSlide: number;
@@ -32,29 +32,34 @@ export function HoverSlider({ children, className }: { children: React.ReactNode
   );
 }
 
-const products: Product[] = [
-  { name: "Mithaq", image: "/projects/placeholders/mithaq.svg" },
-  { name: "PriorityPlanR", image: "/projects/placeholders/priorityplanr.svg" },
-  { name: "Viyra", image: "/projects/placeholders/viyra.svg" },
-  { name: "First Line AI", image: "/projects/placeholders/first-line-ai.svg" },
-  { name: "Smart NFC Guest Pass", image: "/projects/placeholders/smart-nfc-guest-pass.svg" },
-  { name: "Delicious Fitness", image: "/projects/placeholders/delicious-fitness.svg" }
+export const products: Product[] = [
+  { name: "hospitalityOS", image: "/projects/placeholders/hospitalityos.svg" },
+  { name: "HospitalityOps", image: "/projects/placeholders/hospitalityops.svg" },
+  { name: "HospitalityTV", image: "/projects/placeholders/hospitalitytv.svg" },
+  { name: "Mithaq", image: "/projects/mithaq.png" },
+  { name: "Viyra", image: "/projects/viyra.png" },
+  { name: "Smart NFC Guest Pass", image: "/projects/smart-nfc.png" },
+  { name: "Delicious Fitness", image: "/projects/deliciousfitness.png" }
 ];
 
-export function ProductHoverSlider() {
+export function ProductHoverSlider({ onActiveProductChange }: { onActiveProductChange?: (product: Product) => void }) {
   const [activeSlide, setActiveSlide] = useState(0);
+  const updateActiveProduct = (index: number) => {
+    setActiveSlide(index);
+    onActiveProductChange?.(products[index]);
+  };
 
   return (
     <HoverSlider>
-      <div className="space-y-2" onMouseLeave={() => setActiveSlide(0)}>
+      <div className="space-y-2" onMouseLeave={() => updateActiveProduct(0)}>
         {products.map((product, index) => {
           const isActive = activeSlide === index;
           return (
             <button
               key={product.name}
               type="button"
-              onMouseEnter={() => setActiveSlide(index)}
-              onFocus={() => setActiveSlide(index)}
+              onMouseEnter={() => updateActiveProduct(index)}
+              onFocus={() => updateActiveProduct(index)}
               className="group flex w-full items-center gap-3 text-left"
               aria-label={product.name}
             >
@@ -66,7 +71,7 @@ export function ProductHoverSlider() {
               >
                 {product.name}
               </span>
-              <span className={cn("h-px flex-1 transition-colors duration-300", isActive ? "bg-black/20" : "bg-black/12")} />
+              <span className={cn("h-px flex-1 transition-colors duration-300", isActive ? "bg-[#050505]/20" : "bg-[#050505]/12")} />
               <span className={cn("w-8 text-right text-2xl tabular-nums transition-colors duration-300", isActive ? "text-black/70" : "text-black/30")}>{String(index + 1).padStart(2, "0")}</span>
             </button>
           );
