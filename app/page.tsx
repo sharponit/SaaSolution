@@ -2,8 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { DriveLanguageSwitcher } from './i18n/language-provider';
 import { NewProductPopup } from './new-product-popup';
-import { ConsultingLink, HomeConsultingSection } from '../components/consulting/client-bits';
-import { homeSection } from '../lib/consulting/content';
 
 type Project = {
   name: string;
@@ -21,7 +19,7 @@ const projects: Project[] = [
   { name: 'Delicious Fitness', detail: 'Social food and meal preparation', tone: 'green', href: 'https://staging.deliciousfitness.eu', external: true, image: '/projects/delicious-fitness.webp', imageAlt: 'Delicious Fitness mobile app preview' },
   { name: 'SaaSolution Drive', detail: 'Private cloud storage and offline-first Edge/NAS sync', tone: 'drive', href: '/drive' },
   { name: 'hospitalityOS', detail: 'Multilingual hotel website and brand platform', tone: 'hospitalityos', href: 'https://hospitalityos.es/en', external: true, image: '/projects/hospitalityos.svg', imageAlt: 'HospitalityOS official network mark' },
-  { name: 'HospitalityTV', detail: 'A smarter in-room guest experience', tone: 'hospitalitytv', href: 'https://hospitalitytv.es/en', external: true, image: '/projects/hospitalitytv.webp', imageAlt: 'HospitalityTV guest-screen preview' },
+  { name: 'HospitalityTV', detail: 'A smarter in-room guest experience', tone: 'hospitalitytv', href: 'https://hospitalitytv.es/en', external: true, image: '/projects/hospitalitytv.png', imageAlt: 'HospitalityTV guest-screen preview' },
   { name: 'Viyra', detail: 'International workflow automation', tone: 'pink' },
 ];
 
@@ -41,7 +39,6 @@ export default function CompanyHome() {
         <nav aria-label="Company navigation">
           <a href="#about">About</a>
           <a href="#work">Products</a>
-          <ConsultingLink page="landing" label={{ en: 'Consulting', es: 'Consultoría' }} />
           <a href="#method">Method</a>
           <a href="#contact">Contact</a>
         </nav>
@@ -107,8 +104,6 @@ export default function CompanyHome() {
         <p>Modern cloud architecture, automation and human-centred workflows brought together in software that does real work.</p>
       </section>
 
-      <HomeConsultingSection />
-
       <section className="company-method" id="method">
         <div className="method-title"><span>The SaaSolutions method</span><h2>From brief to<br />standout launch.</h2></div>
         <div className="method-list">
@@ -155,10 +150,6 @@ export default function CompanyHome() {
             <h3>Company</h3>
             <a href="#about">About us</a>
             <a href="/mission-vision">Mission &amp; vision</a>
-            <ConsultingLink page="landing" label={homeSection.links[0].label} />
-            <ConsultingLink page="public" label={homeSection.links[1].label} />
-            <ConsultingLink page="private" label={homeSection.links[2].label} />
-            <ConsultingLink page="healthcheck" label={homeSection.links[3].label} />
             <a href="/careers">Careers / Vacancies</a>
             <a href="/partners">Partners</a>
             <a href="mailto:hello@saasolution.es">Contact</a>
