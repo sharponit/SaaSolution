@@ -16,7 +16,7 @@ from pathlib import Path
 from argostranslate import translate
 
 
-ROUTES = ("/", "/connectgrid", "/drive", "/drive/edge", "/drive/edge/install", "/drive/privacy", "/drive/terms")
+ROUTES = ("/", "/consultancy", "/connectgrid", "/drive", "/drive/edge", "/drive/edge/install", "/drive/privacy", "/drive/terms")
 LOCALES = ("es", "nl", "ar", "pt", "fr", "de")
 OUTPUT = Path(__file__).parents[1] / "app" / "i18n" / "translations.json"
 MANUAL_OVERRIDES = Path(__file__).parents[1] / "app" / "i18n" / "manual-overrides.json"
@@ -203,7 +203,10 @@ def translate_preserving_names(text: str, locale: str) -> str:
             whitespace = re.match(r"^(\s*)([\s\S]*?)(\s*)$", piece)
             prefix, content, suffix = whitespace.groups() if whitespace else ("", piece, "")
             translated.append(prefix + translate.translate(content, "en", locale) + suffix)
-    return "".join(translated).strip()
+    # Some local model outputs contain HTML entities (notably &quot; around
+    # protected product names). Store readable Unicode text in the catalogue;
+    # React escapes it safely when rendering.
+    return html.unescape("".join(translated).strip())
 
 
 def main() -> None:
@@ -215,7 +218,9 @@ def main() -> None:
         print(f"Translating {locale}...", flush=True)
         catalogue[locale] = {}
         for index, source in enumerate(copy, start=1):
-            catalogue[locale][source] = existing.get(locale, {}).get(source) or translate_preserving_names(source, locale)
+            catalogue[locale][source] = html.unescape(
+                existing.get(locale, {}).get(source) or translate_preserving_names(source, locale)
+            )
             if index % 25 == 0:
                 print(f"  {index}/{len(copy)}", flush=True)
         catalogue[locale].update(OVERRIDES.get(locale, {}))

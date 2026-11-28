@@ -5,6 +5,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://saasolution.es';
   return [
     { url: `${baseUrl}/`, changeFrequency: 'monthly', priority: 1 },
+    { url: `${baseUrl}/consultancy`, changeFrequency: 'monthly', priority: 0.95 },
     { url: `${baseUrl}/drive`, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/drive/edge`, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/drive/edge/beta`, changeFrequency: 'weekly', priority: 0.9 },
