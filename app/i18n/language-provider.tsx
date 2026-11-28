@@ -95,10 +95,15 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   return <LanguageContext.Provider value={{ locale, setLocale }}>{children}</LanguageContext.Provider>;
 }
 
-function useLanguage() {
+export function useLanguage() {
   const context = useContext(LanguageContext);
   if (!context) throw new Error('LanguageSwitcher must be used inside LanguageProvider');
   return context;
+}
+
+// Compatibility hook for the existing consulting components retained on main.
+export function useSiteLocale() {
+  return useLanguage();
 }
 
 export function CompanyLanguageSwitcher() {

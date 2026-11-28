@@ -38,6 +38,7 @@ export default function CompanyHome() {
         <a href="#top" className="company-logo">SaaSolutions <sup>SL</sup></a>
         <nav aria-label="Company navigation">
           <a href="#about">About</a>
+          <Link href="/consultancy">Consultancy</Link>
           <a href="#work">Products</a>
           <a href="#method">Method</a>
           <a href="#contact">Contact</a>
@@ -152,6 +153,7 @@ export default function CompanyHome() {
             <a href="/mission-vision">Mission &amp; vision</a>
             <a href="/careers">Careers / Vacancies</a>
             <a href="/partners">Partners</a>
+            <Link href="/consultancy">Consultancy</Link>
             <a href="mailto:hello@saasolution.es">Contact</a>
           </section>
           <section>
